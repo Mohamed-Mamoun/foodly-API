@@ -14,6 +14,8 @@ module.exports = {
       }
     },
 
+
+    
     // -> Function To Get All Categories
     getAllCategories: async (req,res) => {
         try {
@@ -23,4 +25,30 @@ module.exports = {
             res.status(500).json({status: false, message: error.message});
         }
     },
+
+
+    
+    // -> Function to get random 4 Categories
+    getRandomCategories: async (req,res) => {
+      
+      try {
+        let categories = await Category.aggregate([
+          {$match: {value: {$ne: "more"}}},
+          {$sample: {size: 4}},
+        ]);
+
+        const moreCategory = await Category.findOne({value: "more"}, {__v: 0});
+
+        if(moreCategory){
+          categories.push(moreCategory);
+        }
+
+        res.status(200).json(categories);
+
+      } catch (error) {
+        res.status(500).json({status: false, message: error.message});
+      }
+
+    }
+
 };
