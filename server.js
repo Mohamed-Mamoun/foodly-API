@@ -5,6 +5,8 @@ const categoryRouter = require("./routes/categoryRouter");
 const restaurantRouter = require("./routes/restaurantRouter");
 const foodsRouter = require("./routes/foodsRouter");
 const ratingRouter = require("./routes/ratingRouter");
+const authRouter = require("./routes/authRouter");
+const userRouter = require("./routes/authRouter");
 
 const app = express();
 const port = process.env.PORT || 6013;
@@ -20,6 +22,12 @@ mongoose
 // -> MIDDILEWARE
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// -> Auth Router
+app.use("/api/auth", authRouter);
+
+// -> user Router
+app.use("/api/auth", userRouter);
 
 // -> Categories Router
 app.use("/api/categories", categoryRouter);
