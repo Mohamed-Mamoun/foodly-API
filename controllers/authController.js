@@ -82,8 +82,8 @@ module.exports = {
           .json({ status: false, messege: "User not found" });
       }
       // -> Check Password
-      const decreptedPass = CryptoJs.decrypt(
-        req.body.password,
+      const decreptedPass = CryptoJs.AES.decrypt(
+        user.password,
         process.env.SECRETKEY
       );
       const decreptedPassSTR = decreptedPass.toString(CryptoJs.enc.Utf8);
@@ -104,7 +104,7 @@ module.exports = {
         { expiresIn: "21d" }
       );
 
-      const { password, otp, ...others } = user.doc;
+      const { password, otp, __v, ...others } = user._doc;
 
       res.status(200).json({ ...others, userToken });
     } catch (error) {

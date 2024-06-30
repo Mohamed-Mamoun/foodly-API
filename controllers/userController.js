@@ -15,7 +15,7 @@ module.exports = {
   },
 
   // -> Function To verify user account
-  verifyAcoount: async (req, res) => {
+  verifyAccount: async (req, res) => {
     const userOtp = req.params.otp;
 
     try {
@@ -67,7 +67,7 @@ module.exports = {
   },
 
   // -> Function To delete user
-  getUser: async (req, res) => {
+  deleteUser: async (req, res) => {
     try {
       await User.findByIdAndDelete(req.user.id);
 

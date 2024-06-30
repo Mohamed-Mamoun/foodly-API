@@ -6,7 +6,7 @@ const restaurantRouter = require("./routes/restaurantRouter");
 const foodsRouter = require("./routes/foodsRouter");
 const ratingRouter = require("./routes/ratingRouter");
 const authRouter = require("./routes/authRouter");
-const userRouter = require("./routes/authRouter");
+const userRouter = require("./routes/userRouter");
 
 const app = express();
 const port = process.env.PORT || 6013;
@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/auth", authRouter);
 
 // -> user Router
-app.use("/api/auth", userRouter);
+app.use("/api/users", userRouter);
 
 // -> Categories Router
 app.use("/api/categories", categoryRouter);
